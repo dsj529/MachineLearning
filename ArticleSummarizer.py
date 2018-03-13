@@ -7,7 +7,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 import requests
 
-class FrequencySummarizer:
+class ArticleSummarizer:
     """This class and supplementary functions will get the text of a Washington Post
     article, find the wordfrequencies within (excluding stopwords), then determines the
     top N sentences to summarize the article's content based on word frequencies)"""
@@ -45,27 +45,25 @@ class FrequencySummarizer:
         top_sents = nlargest(n, ranking, key=ranking.get)
         return [sents[j] for j in top_sents]
 
-####
+    def parse_wapo_article(url):
+        src = requests.get(url)
+        full_txt = src.content
 
-def parse_wapo_article(url):
-    src = requests.get(url)
-    full_txt = src.content
+        soup = BeautifulSoup(full_txt)
+        text = ' '.join(map(lambda p: p.text, soup.find_all('article')))
 
-    soup = BeautifulSoup(full_txt)
-    text = ' '.join(map(lambda p: p.text, soup.find_all('article')))
+        soup2 = BeautifulSoup(text)
+        text = ' '.join(map(lambda p: p.text, soup2.find_all('p')))
 
-    soup2 = BeautifulSoup(text)
-    text = ' '.join(map(lambda p: p.text, soup2.find_all('p')))
-
-    return soup.title.text, text
+        return soup.title.text, text
 
 ###
 
 test_url = ('https://www.washingtonpost.com/news/the-switch/wp/2015/08/06/'
             'why-kids-are-meeting-more-strangers-online-than-ever-before/')
 
-url_text = parse_wapo_article(test_url)
+artS = ArticleSummarizer()
 
-fs = FrequencySummarizer()
+url_text = artS.parse_wapo_article(test_url)
 
-summary = fs.summarize(url_text[1], 3)
+summary = artS.summarize(url_text[1], 3)
