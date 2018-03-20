@@ -11,6 +11,8 @@ revised to refelct a much more coherent methodology of software development.
 
 Additionally, the code refactoring allowed the opportunity to implement better login
 security for the Twitter authentication credentials.
+
+This project uses the annotated twitter corpus provided by Niek Sanders.
 '''
 
 from string import punctuation
@@ -172,9 +174,10 @@ class TweetAnalyzer:
         return [_labels[tweet[1]] for tweet in self.training_data]
 
 def main():
+    # These two variables will need to change to reflect where the Sanders tweet data is stored on the local machine.
     source = '/home/dsj529/Documents/PyProjects/Sanders_Twitter/corpus.csv'
     dest = '/home/dsj529/Documents/PyProjects/Sanders_Twitter/full-corpus.csv'
-
+    
     analyzer = TweetAnalyzer()
     analyzer.buildCorpus(source, dest, False)
     analyzer.pre_process()
