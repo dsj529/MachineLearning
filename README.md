@@ -8,3 +8,5 @@ Various projects and scripts to explore machine learning and data analysis in Py
 * ArticleClassifier:  Collects a corpus of tech and non-tech articles from the NYTimes and Washington Post websites and creates a Naive-Bayes classifier to determine Tech/Non-Tech labels of test text.  Also presents K-Means clustering and TF-IDF vectorizing of text.
 
 * Titanic2:  Uses the Kaggle Titanic Survivors dataset and compares the accuracy of Decision Tree, Random Forest, SGD and Gaussian Naive Bayes classification algorithms.
+
+* TweetSentiment:  Implementations of Naive Bayes and SGD classification algorithms to evaluate user sentiment on Twitter for given terms.  This file has significant refactoring and revision of code from the examples drawn on, to create a more readable and secure application.
