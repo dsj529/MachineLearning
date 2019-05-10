@@ -11,7 +11,7 @@ def newton_root(x, root, epsilon=7):
     def df(guess):
         return root * guess**(root-1)
     
-    guess = x/root
+    guess = max(x/root, 1)
     i = 0
     epsilon = 10**-epsilon
     while abs(f(guess)) > epsilon:
@@ -23,3 +23,4 @@ def newton_root(x, root, epsilon=7):
                   .format(guess))
     print('{x}**{root} is {guess:f}, {i} iterations needed'
           .format(root=root, x=x, guess=guess, i=i))
+    
